@@ -1,0 +1,18 @@
+version: "1"
+services:
+    app:
+        hostname: 'flight.local'
+        build:
+            context: .
+            dockerfile: ./docker/dockerfile
+        networks:
+            - internal
+        volumes:
+            - ./application/:/var/www/html/
+            - ./logs/php.log:/var/log/fpm-php.www.log
+        container_name: php
+        expose:
+            - "9000:80"
+networks:
+    internal:
+        driver: bridge
